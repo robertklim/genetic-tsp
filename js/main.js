@@ -1,7 +1,8 @@
-const citiesNum = 20;
+const citiesNum = 5;
 
 let cities = [];
 let bestDistance;
+let bestOrder = [];
 
 function swap(a, i, j) {
     let tmp = a[i];
@@ -28,6 +29,7 @@ function setup() {
     }
 
     bestDistance = calculateDistance(cities);
+    bestOrder = cities.slice();
 
 }
 
@@ -39,11 +41,21 @@ function draw() {
         ellipse(cities[i].x, cities[i].y, 4, 4);
     }
 
+    // draw current cities order
     stroke(255);
     noFill();
     beginShape();
     for (let i = 0; i < cities.length; i++) {
         vertex(cities[i].x, cities[i].y);
+    }
+    endShape();
+
+    // draw best cities order
+    stroke(0, 255, 0);
+    noFill();
+    beginShape();
+    for (let i = 0; i < cities.length; i++) {
+        vertex(bestOrder[i].x, bestOrder[i].y);
     }
     endShape();
 
@@ -54,6 +66,7 @@ function draw() {
     let newDistance = calculateDistance(cities);
     if(newDistance < bestDistance) {
         bestDistance = newDistance;
+        bestOrder = cities.slice();
         console.log(bestDistance);
     }
 
