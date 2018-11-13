@@ -1,4 +1,4 @@
-const citiesNum = 10
+const citiesNum = 4
 
 let cities = [];
 let bestDistance;
@@ -12,11 +12,13 @@ function swap(a, i, j) {
     a[j] = tmp;
 }
 
-function calculateDistance(points) {
+function calculateDistance(points, order) {
     let distance = 0;
 
-    for (let i = 0; i < points.length - 1; i++) {
-        let d = dist(points[i].x, points[i].y, points[i+1].x, points[i+1].y);
+    for (let i = 0; i < order.length - 1; i++) {
+        cityA = points[order[i]];
+        cityB = points[order[i+1]];
+        let d = dist(cityA.x, cityA.y, cityB.x, cityB.y);
         distance += d;
     }
     return distance;
@@ -31,8 +33,8 @@ function setup() {
         order[i] = i;
     }
 
-    bestDistance = calculateDistance(cities);
-    bestOrder = cities.slice();
+    bestDistance = calculateDistance(cities, order);
+    bestOrder = order.slice();
 
 }
 
@@ -49,8 +51,9 @@ function draw() {
     stroke(255);
     noFill();
     beginShape();
-    for (let i = 0; i < cities.length; i++) {
-        vertex(cities[i].x, cities[i].y);
+    for (let i = 0; i < order.length; i++) {
+        let index = order[i];
+        vertex(cities[index].x, cities[index].y);
     }
     endShape();
 
@@ -58,19 +61,20 @@ function draw() {
     stroke(0, 255, 0);
     noFill();
     beginShape();
-    for (let i = 0; i < cities.length; i++) {
-        vertex(bestOrder[i].x, bestOrder[i].y);
+    for (let i = 0; i < bestOrder.length; i++) {
+        index = bestOrder[i];
+        vertex(cities[index].x, cities[index].y);
     }
     endShape();
 
-    let i = floor(random(cities.length));
-    let j = floor(random(cities.length));
-    swap(cities, i, j);
+    //let i = floor(random(cities.length));
+    //let j = floor(random(cities.length));
+    //swap(cities, i, j);
 
-    let newDistance = calculateDistance(cities);
+    let newDistance = calculateDistance(cities, order);
     if(newDistance < bestDistance) {
         bestDistance = newDistance;
-        bestOrder = cities.slice();
+        bestOrder = order.slice();
         console.log(bestDistance);
     }
 
