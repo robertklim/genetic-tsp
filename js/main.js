@@ -1,10 +1,19 @@
-const citiesNum = 4
+const citiesNum = 5
 
 let cities = [];
 let bestDistance;
 let bestOrder = [];
 let order = [];
-let count = 0;
+let count = 1;
+
+var f = [];
+function factorial(n) {
+    if (n == 0 || n == 1)
+        return 1;
+    if (f[n] > 0)
+        return f[n];
+    return f[n] = factorial(n - 1) * n;
+}
 
 function swap(a, i, j) {
     let tmp = a[i];
@@ -26,6 +35,8 @@ function calculateDistance(points, order) {
 
 function setup() {
     createCanvas(600, 600);
+
+    factorial(citiesNum);
 
     for (let i = 0; i < citiesNum; i++) {
         let v = createVector(random(width), random(height));
@@ -78,14 +89,21 @@ function draw() {
         console.log(bestDistance);
     }
 
-    let s = '';
+    let s = 'current order: ';
     for (let i = 0; i < order.length; i++) {
         s += order[i];
     }
-    textSize(32);
+    s += '\nbest order: ';
+    for (let i = 0; i < bestOrder.length; i++) {
+        s += bestOrder[i];
+    }
+    s += '\nbest distance: ' + bestDistance.toFixed(2);
+    s += '\ntotal permutations: ' + f[citiesNum];
+    s += '\ncurrent: ' + count;
+    s += '\ndone: ' + (count / f[citiesNum] * 100).toFixed(2) + '%';
+    textSize(16);
     stroke(255);
-    fill(255);
-    text(s, 40, height - 40);
+    text(s, 40, height - 140);
 
     nextOrder();
 
