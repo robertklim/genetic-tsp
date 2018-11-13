@@ -21,4 +21,12 @@ function draw() {
         ellipse(cities[i].x, cities[i].y, 4, 4);
     }
 
+    stroke(255);
+    noFill();
+    beginShape();
+    for (let i = 0; i < cities.length; i++) {
+        vertex(cities[i].x, cities[i].y);
+    }
+    endShape();
+
 }
