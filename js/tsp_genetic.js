@@ -1,6 +1,6 @@
-const citiesNum = 10;
-const populationNum = 300;
-const mutationRate = 0.1;
+const citiesNum = 15;
+const populationNum = 500;
+const mutationRate = 0.01;
 
 let cities = [];
 let order = [];
@@ -76,10 +76,28 @@ function mutate(order, mutationRate) {
     }
 }
 
+function crossOver(orderA, orderB) {
+    let start = floor(random(orderA.length));
+    let end = floor(random(start + 1, orderA.length));
+    let newOrder = orderA.slice(start, end);
+
+    let left = citiesNum - newOrder.length;
+
+    for (i = 0; i < orderB.length; i++) {
+        let city = orderB[i];
+        if(!newOrder.includes(city)) {
+            newOrder.push(city);
+        }
+    }
+    return newOrder;
+}
+
 function nextGeneration() {
     let newPopulation = [];
     for (let i = 0; i < population.length; i++) {
-        let order = pickOne(population, fitness);
+        let orderA = pickOne(population, fitness);
+        let orderB = pickOne(population, fitness);
+        let order = crossOver(orderA, orderB);
         mutate(order, mutationRate);
         newPopulation[i] = order;
     }
