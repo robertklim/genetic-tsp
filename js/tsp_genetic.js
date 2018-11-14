@@ -1,6 +1,6 @@
-const citiesNum = 15;
-const populationNum = 500;
-const mutationRate = 0.01;
+const citiesNum = 12;
+const populationNum = 300;
+const mutationRate = 0.1;
 
 let cities = [];
 let order = [];
@@ -70,7 +70,7 @@ function mutate(order, mutationRate) {
     for (let i = 0; i < citiesNum; i++) {
         if (random(1) < mutationRate) {
             let indexA = floor(random(order.length));
-            let indexB = floor(random(order.length));
+            let indexB = (indexA + 1) % citiesNum;
             swap(order, indexA, indexB);
         }
     }
