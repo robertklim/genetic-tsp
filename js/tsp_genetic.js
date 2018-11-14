@@ -1,5 +1,6 @@
 const citiesNum = 10;
 const populationNum = 300;
+const mutationRate = 0.1;
 
 let cities = [];
 let order = [];
@@ -66,16 +67,20 @@ function normalizeFitness() {
 }
 
 function mutate(order, mutationRate) {
-    let indexA = floor(random(order.length));
-    let indexB = floor(random(order.length));
-    swap(order, indexA, indexB);
+    for (let i = 0; i < citiesNum; i++) {
+        if (random(1) < mutationRate) {
+            let indexA = floor(random(order.length));
+            let indexB = floor(random(order.length));
+            swap(order, indexA, indexB);
+        }
+    }
 }
 
 function nextGeneration() {
     let newPopulation = [];
     for (let i = 0; i < population.length; i++) {
         let order = pickOne(population, fitness);
-        mutate(order);
+        mutate(order, mutationRate);
         newPopulation[i] = order;
     }
     population = newPopulation;
