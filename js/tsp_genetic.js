@@ -6,8 +6,9 @@ let order = [];
 let population = [];
 let fitness = [];
 
-bestDistance = Infinity;
-bestOrder = [];
+let bestDistance = Infinity;
+let bestOrder = [];
+let currentBestOrder = [];
 
 function calculateDistance(points, order) {
     let distance = 0;
@@ -39,11 +40,16 @@ function pickOne(list, prob) {
 }
 
 function calculateFitness() {
+    let currentBestDistance = Infinity;
     for (let i = 0; i < population.length; i++) {
         let dist = calculateDistance(cities, population[i]);
         if (dist < bestDistance) {
             bestDistance = dist;
             bestOrder = population[i];
+        }
+        if (dist < currentBestDistance) {
+            currentBestDistance = dist;
+            currentBestOrder = population[i];
         }
         fitness[i] = 1 / (dist + 1); // higher the distance lower the fitness
     }
@@ -104,14 +110,14 @@ function draw() {
     }
 
     // draw current cities order
-    // stroke(255);
-    // noFill();
-    // beginShape();
-    // for (let i = 0; i < order.length; i++) {
-    //     let index = order[i];
-    //     vertex(cities[index].x, cities[index].y);
-    // }
-    // endShape();
+    stroke(255);
+    noFill();
+    beginShape();
+    for (let i = 0; i < currentBestOrder.length; i++) {
+        let index = currentBestOrder[i];
+        vertex(cities[index].x, cities[index].y);
+    }
+    endShape();
 
     // draw best cities order
     stroke(0, 255, 0);
