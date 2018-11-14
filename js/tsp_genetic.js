@@ -21,6 +21,27 @@ function calculateDistance(points, order) {
     return distance;
 }
 
+function calculateFitness() {
+    for (let i = 0; i < population.length; i++) {
+        let dist = calculateDistance(cities, population[i]);
+        if (dist < bestDistance) {
+            bestDistance = dist;
+            bestOrder = population[i];
+        }
+        fitness[i] = 1 / (dist + 1); // higher the distance lower the fitness
+    }
+}
+
+function normalizeFitness() {
+    let sum = 0;
+    for (let i = 0; i < fitness.length; i++) {
+        sum += fitness[i];
+    }
+    for (let i = 0; i < fitness.length; i++) {
+        fitness[i] = fitness[i] / sum;
+    }
+}
+
 function setup() {
     createCanvas(600, 600);
 
@@ -34,19 +55,13 @@ function setup() {
         population[i] = shuffle(order.slice()); // p5.js shuffle function
     }
 
-    for (let i = 0; i < population.length; i++) {
-        let dist = calculateDistance(cities, population[i]);
-        if (dist < bestDistance) {
-            bestDistance = dist;
-            bestOrder = population[i];
-        }
-        fitness[i] = dist;
-    }
-
 }
 
 function draw() {
     background(0);
+
+    calculateFitness();
+    normalizeFitness();
 
     // draw cities
     fill(255);
