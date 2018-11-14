@@ -1,5 +1,5 @@
-const citiesNum = 5;
-const populationNum = 100;
+const citiesNum = 10;
+const populationNum = 300;
 
 let cities = [];
 let order = [];
@@ -19,6 +19,23 @@ function calculateDistance(points, order) {
         distance += d;
     }
     return distance;
+}
+
+function swap(a, i, j) {
+    let tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
+}
+
+function pickOne(list, prob) {
+    let index = 0;
+    let r = random(1);
+    while (r > 0) {
+        r = r - prob[index];
+        index++;
+    }
+    index--;
+    return list[index].slice();
 }
 
 function calculateFitness() {
@@ -42,6 +59,22 @@ function normalizeFitness() {
     }
 }
 
+function mutate(order, mutationRate) {
+    let indexA = floor(random(order.length));
+    let indexB = floor(random(order.length));
+    swap(order, indexA, indexB);
+}
+
+function nextGeneration() {
+    let newPopulation = [];
+    for (let i = 0; i < population.length; i++) {
+        let order = pickOne(population, fitness);
+        mutate(order);
+        newPopulation[i] = order;
+    }
+    population = newPopulation;
+}
+
 function setup() {
     createCanvas(600, 600);
 
@@ -62,6 +95,7 @@ function draw() {
 
     calculateFitness();
     normalizeFitness();
+    nextGeneration();
 
     // draw cities
     fill(255);
@@ -70,14 +104,14 @@ function draw() {
     }
 
     // draw current cities order
-    stroke(255);
-    noFill();
-    beginShape();
-    for (let i = 0; i < order.length; i++) {
-        let index = order[i];
-        vertex(cities[index].x, cities[index].y);
-    }
-    endShape();
+    // stroke(255);
+    // noFill();
+    // beginShape();
+    // for (let i = 0; i < order.length; i++) {
+    //     let index = order[i];
+    //     vertex(cities[index].x, cities[index].y);
+    // }
+    // endShape();
 
     // draw best cities order
     stroke(0, 255, 0);
