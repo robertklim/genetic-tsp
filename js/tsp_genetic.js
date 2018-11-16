@@ -23,12 +23,6 @@ function calculateDistance(points, order) {
     return distance;
 }
 
-function swap(a, i, j) {
-    let tmp = a[i];
-    a[i] = a[j];
-    a[j] = tmp;
-}
-
 function pickOne(list, prob) {
     let index = 0;
     let r = random(1);

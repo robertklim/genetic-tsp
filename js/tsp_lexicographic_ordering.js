@@ -6,21 +6,6 @@ let bestOrder = [];
 let order = [];
 let count = 1;
 
-var f = [];
-function factorial(n) {
-    if (n == 0 || n == 1)
-        return 1;
-    if (f[n] > 0)
-        return f[n];
-    return f[n] = factorial(n - 1) * n;
-}
-
-function swap(a, i, j) {
-    let tmp = a[i];
-    a[i] = a[j];
-    a[j] = tmp;
-}
-
 function calculateDistance(points, order) {
     let distance = 0;
 
@@ -108,8 +93,6 @@ function draw() {
     nextOrder();
 
 }
-
-// This is my lexical order algorithm
 
 function nextOrder() {
     count++;

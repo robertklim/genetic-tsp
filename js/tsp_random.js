@@ -4,12 +4,6 @@ let cities = [];
 let bestDistance;
 let bestOrder = [];
 
-function swap(a, i, j) {
-    let tmp = a[i];
-    a[i] = a[j];
-    a[j] = tmp;
-}
-
 function calculateDistance(points) {
     let distance = 0;
 
