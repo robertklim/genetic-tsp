@@ -11,6 +11,9 @@ class GeneticTSP {
         this.bestDistance = Infinity;
         this.bestOrder = [];
         this.currentBestOrder = [];
+
+        this.count = 1;
+        this.bestPopulationNumber = 1;
     }
 
     calculateDistance(points, order) {
@@ -43,6 +46,7 @@ class GeneticTSP {
             if (dist < this.bestDistance) {
                 this.bestDistance = dist;
                 this.bestOrder = this.population[i];
+                this.bestPopulationNumber = this.count;
             }
             if (dist < currentBestDistance) {
                 currentBestDistance = dist;
@@ -138,6 +142,13 @@ class GeneticTSP {
             vertex(this.cities[index].x, this.cities[index].y);
         }
         endShape();
+
+        let s = '\ncurrent population: ' + this.count;
+        s += '\nbest population: ' + this.bestPopulationNumber;
+        s += '\nshortest distance: ' + this.bestDistance.toFixed(2) + 'px';
+        textSize(16);
+        stroke(255);
+        text(s, 0, 0);
     }
 
     run() {
@@ -147,6 +158,7 @@ class GeneticTSP {
         this.normalizeFitness();
         this.nextGeneration();
         this.draw();
+        this.count++;
     }
 
 }

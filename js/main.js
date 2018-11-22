@@ -1,4 +1,4 @@
-const citiesNum = 8;
+const citiesNum = 7;
 const populationNum = 300;
 const mutationRate = 0.1;
 
@@ -9,7 +9,7 @@ function setup() {
     createCanvas(1200, 800);
 
     for (let i = 0; i < citiesNum; i++) {
-        let v = createVector(floor(random(width / 2)), floor(random(height / 2)));
+        let v = createVector(floor(random(20, width / 2 - 20)), floor(random(50, height / 2 - 20)));
         cities[i] = v;
     }
 

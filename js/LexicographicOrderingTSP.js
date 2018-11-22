@@ -6,6 +6,9 @@ class LexicographicOrderingTSP {
         this.bestOrder = [];
         this.generateOrder();
         this.bestOrder = this.order;
+        this.count = 1;
+        this.bestIteration = 1;
+        factorial(cities.length);
     }
 
     calculateDistance(points, order) {
@@ -82,6 +85,16 @@ class LexicographicOrderingTSP {
             vertex(this.cities[index].x, this.cities[index].y);
         }
         endShape();
+
+        let s = '\ntotal permutations: ' + f[this.cities.length];
+        s += '\ncurrent: ' + this.count;
+        s += '\ndone: ' + (this.count / f[this.cities.length] * 100).toFixed(2) + '%';
+        s += '\nbest iteration: ' + this.bestIteration;
+        s += '\nshortest distance: ' + this.bestDistance.toFixed(2) + 'px';
+        textSize(16);
+        stroke(255);
+        text(s, 0, 0);
+
         // console.log(this.cities);
         // console.log(this.order);
         // console.log(this.bestOrder);
@@ -94,9 +107,11 @@ class LexicographicOrderingTSP {
         if (newDistance < this.bestDistance) {
             this.bestDistance = newDistance;
             this.bestOrder = this.order.slice();
+            this.bestIteration = this.count;
         }
 
         this.nextOrder();
+        this.count++;
     }
 
 }
