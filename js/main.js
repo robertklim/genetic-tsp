@@ -3,7 +3,9 @@ const populationNum = 300;
 const mutationRate = 0.1;
 
 let cities = [];
-let genetic;
+let geneticTSP;
+let lexicographicOrderingTSP;
+let randomTSP;
 
 function setup() {
     createCanvas(1200, 800);
