@@ -1,4 +1,4 @@
-const citiesNum = 7;
+const citiesNum = 8;
 const populationNum = 300;
 const mutationRate = 0.1;
 
@@ -15,6 +15,7 @@ function setup() {
 
     geneticTSP = new GeneticTSP(cities, populationNum, mutationRate);
     lexicographicOrderingTSP = new LexicographicOrderingTSP(cities);
+    randomTSP = new RandomTSP(cities);
 
 }
 
@@ -25,5 +26,8 @@ function draw() {
 
     translate(floor(width / 2), 0);
     lexicographicOrderingTSP.run();
+    
+    translate(-floor(width / 2), floor(height / 2));
+    randomTSP.run();
 
 }
