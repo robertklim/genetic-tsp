@@ -41,7 +41,8 @@ class RandomTSP {
         }
         endShape();
 
-        let s = '\ncurrent iteration: ' + this.count;
+        let s = '\nRandomTSP';
+        s += '\ncurrent iteration: ' + this.count;
         s += '\nbest iteration: ' + this.bestIteration;
         s += '\nshortest distance: ' + this.bestDistance.toFixed(2) + 'px';
         textSize(16);

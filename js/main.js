@@ -1,4 +1,4 @@
-const citiesNum = 8;
+const citiesNum = 12;
 const populationNum = 300;
 const mutationRate = 0.1;
 

@@ -86,7 +86,8 @@ class LexicographicOrderingTSP {
         }
         endShape();
 
-        let s = '\ntotal permutations: ' + f[this.cities.length];
+        let s = '\nLexicographicOrderingTSP';
+        s += '\ntotal permutations: ' + f[this.cities.length];
         s += '\ncurrent: ' + this.count;
         s += '\ndone: ' + (this.count / f[this.cities.length] * 100).toFixed(2) + '%';
         s += '\nbest iteration: ' + this.bestIteration;

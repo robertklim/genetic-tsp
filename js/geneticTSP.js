@@ -143,7 +143,8 @@ class GeneticTSP {
         }
         endShape();
 
-        let s = '\ncurrent population: ' + this.count;
+        let s = '\nGeneticTSP';
+        s += '\ncurrent population: ' + this.count;
         s += '\nbest population: ' + this.bestPopulationNumber;
         s += '\nshortest distance: ' + this.bestDistance.toFixed(2) + 'px';
         textSize(16);
